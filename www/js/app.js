@@ -1,9 +1,11 @@
 // Ionic Starter App
+angular.module('starter.controllers', ['ionic']);
+angular.module('starter.services', []);
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic','starter.controllers','starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,60 +19,3 @@ angular.module('starter', ['ionic'])
     }
   });
 })
-.controller("ratingController", function($scope,ratingToStars,$log){
-  $scope.rating = 5;
-  $scope.poiRating = ratingToStars.getStarsForPoi($scope.rating/2);
-  $scope.updateStars = function (){
-    $log.debug($scope.rating);
-    $scope.poiRating = ratingToStars.getStarsForPoi($scope.rating/2);
-  }
-
-})
-.service("ratingToStars", function () {
-        return {
-            getStarsForPoi: function(rating) {
-                return calculareStars(rating);
-            }
-        };
-
-        function calculareStars(rating){
-            var starJson = [];
-                var halfFlag = false;
-                if(rating === null){
-                    for(var i=0;i<5;i++)
-                        starJson.push({
-                            id: i,
-                            icon: "ion-ios-star-outline"
-                        });
-                    return starJson;
-                }else{
-                   if((rating % 1) > 0){
-                        halfFlag = true;
-
-                    }else{
-                        halfFlag = false;
-                    }
-                    for(var i=0;i < 5;i++){
-                        if(Math.floor(rating)>i){
-                            starJson.push({
-                                id: i,
-                                icon: "ion-ios-star"
-                            });
-                        }else if(halfFlag){
-                            starJson.push({
-                                id: i,
-                                icon: "ion-ios-star-half"
-                            });
-                            halfFlag=false;
-                        }else{
-                            starJson.push({
-                                id: i,
-                                icon: "ion-ios-star-outline"
-                            });
-                        }
-                    }
-                    return starJson;
-                }
-        }
-    })
-
