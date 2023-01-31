@@ -1,4 +1,7 @@
 # ionic-rating-stars
+
+WARNING: THIS PROJECT USES IONIC V1
+
 A simple example project for presenting and editing rating using stars (with 0.5 step)
 
 This project utilizes a service that takes a number from 0 to 5 and returns
